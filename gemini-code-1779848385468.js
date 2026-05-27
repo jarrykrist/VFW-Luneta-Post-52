@@ -1,0 +1,43 @@
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Mobile Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        // Smoothly alternate the icon between bars and an 'X'
+        const icon = hamburger.querySelector('i');
+        if(icon.classList.contains('fa-bars')) {
+            icon.classList.replace('fa-bars', 'fa-xmark');
+        } else {
+            icon.classList.replace('fa-xmark', 'fa-bars');
+        }
+    });
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+        });
+    });
+
+    // 2. Simple Contact Form Handling
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Grab values for whenever you connect this to a backend mailer
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Visual feedback for the user
+        alert(`Thank you, ${name}! Your message has been sent successfully. Someone from Post 52 will get back to you shortly.`);
+        
+        // Clear the form
+        contactForm.reset();
+    });
+});
